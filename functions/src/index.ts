@@ -8,7 +8,7 @@ import SaveFile from "./SaveFile";
 admin.initializeApp();
 admin.auth();
 
-export default {
+export {
   GetFileList,
   SaveFile,
   LoadFile
