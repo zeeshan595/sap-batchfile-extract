@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>New MR Process</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+  <body>
+    <div id="modal">
+      <div id="modalContainer">
+        <p id="modalBody"></p>
+        <div id="modalContent"></div>
+        <div id="modalbuttons"></div>
+      </div>
+    </div>
+    <div class="header">
+      <div class="dragable">New MR Process</div>
+      <div class="toolbar">
+        <button
+          onclick="onMinimizeButtonClick();"
+          class="toolbar-button orange"
+        ></button>
+        <button
+          onclick="onCloseButtonClick();"
+          class="toolbar-button red"
+        ></button>
+      </div>
+    </div>
+    <div class="content">
+      <img
+        alt="scottish Power"
+        src="https://www.scottishpower.co.uk/assets/images/global/logo/sp_logo.jpg"
+        class="logo"
+      />
+      <div class="m5">
+        <button onclick="onSelectFile();">
+          Select File
+        </button>
+        <button onclick="onCreatePipeDelimitedFile();">
+          Create Pipe Delimited File
+        </button>
+      </div>
+      <div class="m5">
+          <input type="text" placeholder="Record Start Key" value="DOCHEADER" class="d-ib w-auto" />
+          <input type="text" placeholder="Record End Key" value="DOCTRAILER" class="d-ib w-auto" />
+        <div style="margin-top: 5px; margin-bottom: 5px;">
+            <button onclick="onAddFieldClick();">Add Field</button>
+            <button onclick="onSaveFieldsClick();">Save Fields (Offline)</button>
+            <button onclick="onLoadFieldsClick();">Load Fields (Offline)</button>
+            <button onclick="onSaveFieldsOnlineClick();">Save Field (Online)</button>
+            <button onclick="onLoadFieldsOnlineClick();">Load Field (Online)</button>
+        </div>
+        <div class="field-container" id="field-container">
+          <div class="field-template" id="field-template" style="display: none;">
+            <input type="text" placeholder="Header Name" id="header" class="d-ib w-auto" />
+            <input type="number" placeholder="Z Number" id="column" class="d-ib w-auto" />
+            <input type="number" placeholder="Field Number" id="row" class="d-ib w-auto" />
+            <select id="format">
+            </select>
+            <button class="delete-button" id="close-button">x</button>
+            <span id="preview"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- SCRIPTS -->
+    <script src="mainWindow.js"></script>
+  </body>
+</html>

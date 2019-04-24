@@ -1,0 +1,42 @@
+{
+  "name": "new-mr-process",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp && electron build",
+    "clean": "rm -rf build",
+    "build": "echo \"Please use 'build-mac', 'build-linux' or 'build-windows'\"",
+    "build-mac": "gulp && cd build && npm install && electron-packager . --overwrite --platform=darwin --arch=x64 --out=release-builds/mac",
+    "build-linux": "gulp && cd build && npm install && electron-packager . --overwrite --platform=linux --arch=x64 --out=release-builds/linux",
+    "build-windows": "gulp && cd build && npm install && electron-packager . --overwrite --platform=win32 --arch=ia32 --out=release-builds/windows"
+  },
+  "dependencies": {
+    "npm": "^6.8.0",
+    "typescript": "^3.2.1",
+    "unescape": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@types/node": "^11.13.7",
+    "electron": "^3.0.10",
+    "electron-packager": "^12.2.0",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-typescript": "^5.0.0"
+  },
+  "build": {
+    "appId": "new.mr.process",
+    "mac": {
+      "category": "application"
+    }
+  },
+  "files": [
+    "index.js",
+    "index.html",
+    "window.js",
+    "main.css"
+  ],
+  "author": "Zeeshan Abid"
+}
