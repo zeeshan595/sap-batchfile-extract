@@ -131,7 +131,11 @@ const onCreatePipeDelimitedFile = () => {
 
   let outputData = "";
   for (let i = 0; i < fields.length; i++) {
-    outputData += fields[i].Heading + "|";
+    outputData += fields[i].Heading;
+
+    if (i + 1 != fields.length) {
+      outputData += "|"
+    }
   }
   outputData += "\n";
 
@@ -144,7 +148,11 @@ const onCreatePipeDelimitedFile = () => {
     for (let j = 0; j < fields.length; j++) {
       const rows = lines[fields[j].Column].split("|");
       outputData +=
-        formatData(rows[fields[j].Row], fields[j].formatIndex) + "|";
+        formatData(rows[fields[j].Row], fields[j].formatIndex);
+
+      if (j + 1 != fields.length) {
+        outputData += "|";
+      }
     }
     outputData += "\n";
   }

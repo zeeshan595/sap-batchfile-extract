@@ -81,6 +81,27 @@ const formatters = [
 
       return currentDate + suffix + " " + months[date.getMonth()] + " " + date.getFullYear();
     }
+  },
+  {
+    Text: "Bank Account",
+    Converter: value => {
+      let rtn = "";
+      for (let i: number = 0; i < value.length - 4; i++) {
+        rtn += "*";
+      }
+      rtn += value.substring(value.length - 4);
+      return rtn;
+    }
+  },
+  {
+    Text: "Sort Code",
+    Converter: value => {
+      if (value.length != 8) {
+        return value;
+      }
+
+      return "**-**-" + value.substring(6);
+    }
   }
 ] as Formats[];
 
