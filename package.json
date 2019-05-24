@@ -1,5 +1,5 @@
 {
-  "name": "new-mr-process",
+  "name": "sap-batch-file-extract",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
