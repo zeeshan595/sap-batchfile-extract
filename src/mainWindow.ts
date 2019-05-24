@@ -101,12 +101,6 @@ const onLoadFieldsClick = () => {
   }
 };
 
-const onSaveFieldsOnlineClick = () => {
-};
-
-const onLoadFieldsOnlineClick = () => {
-};
-
 const onCreatePipeDelimitedFile = () => {
   if (!selectedFile || selectedFile.length < 1) {
     alert("Please select a data file first!");
@@ -146,10 +140,12 @@ const onCreatePipeDelimitedFile = () => {
   for (let i = 1; i < records.length; i++) {
     const lines = records[i].split("\n");
     for (let j = 0; j < fields.length; j++) {
-      const rows = lines[fields[j].Column].split("|");
-      outputData +=
-        formatData(rows[fields[j].Row], fields[j].formatIndex);
-
+      console.log(fields[j].Column);
+      const lineNumber = lines.find((l, i) => parseInt(l.split('|')[0]) == fields[j].Column);
+      if (lineNumber == undefined)
+        continue;
+      const rows = lines[parseInt(lineNumber)].split("|");
+      outputData += formatData(rows[fields[j].Row], fields[j].formatIndex);
       if (j + 1 != fields.length) {
         outputData += "|";
       }
@@ -198,13 +194,23 @@ const onSelectFile = () => {
 };
 
 const updateFieldPreview = (newField: HTMLElement, f: Field) => {
-  if (!previewInputData) return;
-  if (!previewInputData[f.Column]) return;
-  if (!previewInputData[f.Column][f.Row]) return;
-
   const newFieldPreview = newField.querySelector("#preview") as HTMLSpanElement;
+  if (!previewInputData) {
+    newFieldPreview.innerHTML = "";
+    return;
+  }
+  const line = previewInputData.find((d, i) => parseInt(d[0]) == f.Column);
+  if (!line) {
+    newFieldPreview.innerHTML = "";
+    return;
+  }
+  if (!line[f.Row]) {
+    newFieldPreview.innerHTML = "";
+    return;
+  }
+
   newFieldPreview.innerHTML = formatData(
-    previewInputData[f.Column][f.Row],
+    line[f.Row],
     f.formatIndex
   );
 };
