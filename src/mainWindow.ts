@@ -123,37 +123,43 @@ const onCreatePipeDelimitedFile = () => {
     ]
   });
 
-  let outputData = "";
-  for (let i = 0; i < fields.length; i++) {
-    outputData += fields[i].Heading;
+  try {
+    let outputData = "";
+    for (let i = 0; i < fields.length; i++) {
+      outputData += fields[i].Heading;
 
-    if (i + 1 != fields.length) {
-      outputData += "|"
-    }
-  }
-  outputData += "\n";
-
-  const inputData: string = fs.readFileSync(selectedFile[0], {
-    encoding: "utf8"
-  });
-  const records = inputData.split("DOCHEADER");
-  for (let i = 1; i < records.length; i++) {
-    const lines = records[i].split("\n");
-    for (let j = 0; j < fields.length; j++) {
-      console.log(fields[j].Column);
-      const lineNumber = lines.find((l, i) => parseInt(l.split('|')[0]) == fields[j].Column);
-      if (lineNumber == undefined)
-        continue;
-      const rows = lines[parseInt(lineNumber)].split("|");
-      outputData += formatData(rows[fields[j].Row], fields[j].formatIndex);
-      if (j + 1 != fields.length) {
-        outputData += "|";
+      if (i + 1 != fields.length) {
+        outputData += "|"
       }
     }
     outputData += "\n";
-  }
 
-  fs.writeFileSync(saveLocation, outputData, { encoding: "utf8" });
+    const inputData: string = fs.readFileSync(selectedFile[0], {
+      encoding: "utf8"
+    });
+    const records = inputData.split("DOCHEADER");
+    for (let i = 1; i < records.length; i++) {
+      const lines = records[i].split("\n");
+      for (let j = 0; j < fields.length; j++) {
+
+        const lineNumber = lines.findIndex((l, i) => parseInt(l.split('|')[0]) == fields[j].Column);
+        if (lineNumber < 0)
+          continue;
+        const rows = lines[lineNumber].split("|");
+        outputData += formatData(rows[fields[j].Row], fields[j].formatIndex);
+        if (j + 1 != fields.length) {
+          outputData += "|";
+        }
+      }
+      outputData += "\n";
+    }
+
+    fs.writeFileSync(saveLocation, outputData, { encoding: "utf8" });
+    alert("Save complete!");
+  }
+  catch (e) {
+    alert("There was an unexpected error");
+  }
 };
 
 const onSelectFile = () => {
