@@ -19,7 +19,7 @@
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@types/node": "^11.13.7",
-    "electron": "^3.0.10",
+    "electron": "^9.1.0",
     "electron-packager": "^12.2.0",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
